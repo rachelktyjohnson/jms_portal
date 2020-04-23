@@ -6,7 +6,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="https://use.typekit.net/qmr2evg.css">
-        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/login-styles.css">
     </head>
     <body>
       <div class="loginContainer">
