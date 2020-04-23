@@ -1,0 +1,19 @@
+//breakpoints
+$bp-tablet: 768px;
+$bp-desktop: 1024px;
+
+//colors
+$color-blue: #1d3b6d;
+$color-green: #018f5f;
+$color-gradient: linear-gradient(135deg, #1d3b6d, #018f5f);
+
+//variables
+$border-radius:10px;
+
+//breakpoint mixins
+@mixin tablet{
+  @media(min-width:$bp-tablet){@content;}
+}
+@mixin desktop{
+  @media(min-width:$bp-desktop){@content;}
+}
