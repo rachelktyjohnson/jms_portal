@@ -16,7 +16,7 @@ $errormessage = "";
 
 if (!empty($_POST)){
 
-  $query = $pdo->prepare("SELECT * FROM users WHERE username = ?");
+  $query = $pdo->prepare("SELECT * FROM students WHERE username = ?");
   $query->execute([$_POST['username']]);
   $username = $_POST['username'];
   $user = $query->fetch();

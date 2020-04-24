@@ -121,15 +121,19 @@ body {
   margin-bottom: 15px;
   font-weight: 500;
 }
-#dashboard-container .dashboard-content .card.instruments .instruments-list {
+#dashboard-container .dashboard-content .card.lessons .lesson_tab {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
+  margin-bottom: 20px;
 }
-#dashboard-container .dashboard-content .card.instruments .instruments-list img {
-  width: 50px;
-  margin: 5px;
+#dashboard-container .dashboard-content .card.lessons .lesson_tab img {
+  height: 60px;
+}
+#dashboard-container .dashboard-content .card.lessons .lesson_tab .lesson_data {
+  text-align: left;
+  margin-right: 10px;
 }
 #dashboard-container .dashboard-content .card.zoom .form-control {
   margin: 5px 0;

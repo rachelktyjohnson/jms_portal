@@ -115,18 +115,19 @@ body{
       }
       flex-grow:1;
       text-align:center;
-      &.instruments{
-        .instruments-list{
-          display:flex;
-          flex-direction: row;
-          align-items: flex-start;
-          justify-content: center;
-          img{
-            width:50px;
-            margin:5px;
-          }
+      &.lessons .lesson_tab{
+        display:flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-bottom:20px;
+        img{
+          height:60px;
         }
-
+        .lesson_data{
+          text-align:left;
+          margin-right:10px;
+        }
       }
       &.zoom{
         .form-control{

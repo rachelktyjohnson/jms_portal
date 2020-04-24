@@ -15,7 +15,7 @@ require_once "config.php";
 
 //pull user's data from table
 try{
-  $results = $pdo->prepare("SELECT * FROM users WHERE username=?");
+  $results = $pdo->prepare("SELECT * FROM students WHERE username=?");
   $results->bindParam(1, $_SESSION["username"], PDO::PARAM_STR);
   $results->execute();
   $userData = $results->fetch(PDO::FETCH_ASSOC);
@@ -54,36 +54,60 @@ try{
             $userFirstName = explode(" ",$userData['name']);
           ?>
           <h1>Hi, <?= $userFirstName[0]; ?>!</h1>
-          <h2>Term 2 - Week 1</h2>
+          <?php
+
+          //work out term
+          $termQuery = $pdo->prepare("SELECT * FROM terms WHERE start < CURDATE() AND end > CURDATE()");
+          $termQuery->execute();
+          $termData = $termQuery->fetch(PDO::FETCH_ASSOC);
+
+          //work out date
+          $termStart = $termData['start'];
+          $startDate = new DateTime($termStart);
+          $todayDate = new DateTime(date('Y-m-d'));
+          $difference = $startDate -> diff($todayDate);
+          $theWeek = floor($difference->format('%R%a')/7) +1;
+          ?>
+          <h2><?=$termData['term']?> - Week <?= $theWeek; ?></h2>
         </div>
         <div class="dashboard-announcement">
+          <?php
+            $announcementsQuery = $pdo->prepare("SELECT * FROM announcements LIMIT 1");
+            $announcementsQuery->execute();
+            $announcementData = $announcementsQuery->fetch(PDO::FETCH_ASSOC);
+          ?>
           <div class="announcement-meta">
-            <h2>Term 2 starts!</h2>
-            <span>26/04/2020</span>
+            <h2><?= $announcementData['title'];?></h2>
+            <span><?=date_format(new DateTime($announcementData['date']), 'd-m-Y');?></span>
           </div>
           <p>
-            This week we are back in the swing of things for Term 2! For those who have opted for online lessons, we will be continuing as usual over Zoom. Opt-in is available at any time, just give us a call or email us!
+            <?= $announcementData['description'];?>
           </p>
         </div>
         <div class="dashboard-content">
-          <div class="card instruments">
-            <h2>Your Instruments</h2>
-            <div class="instruments-list">
-              <?php
-                $timeslot_arr = explode(",",$userData['instrument']);
-                foreach ($timeslot_arr as $data){
-                  echo "<img src='img/tab-$data.png' alt='$data' title='" . ucfirst($data) . "'/>";
-                }
-              ?>
-            </div>
-          </div>
-          <div class="card timeslot">
-            <h2>Your Timeslots</h2>
+          <div class="card lessons">
             <?php
-              $timeslot_arr = explode(",",$userData['timeslot']);
-              foreach ($timeslot_arr as $data){
-                echo "<p>$data</p>";
-              }
+            $plural="";
+            $instrument_arr = explode(",",$userData['instrument']);
+            $timeslot_arr = explode(",",$userData['timeslot']);
+            if (count($instrument_arr)>1){
+              $plural="s";
+            }
+            ?>
+            <h2>Your Lesson<?= $plural; ?></h2>
+            <?php
+              for ($i=0; $i<count($instrument_arr); $i++){?>
+                <div class="lesson_tab">
+                  <div class="lesson_data">
+                    <h3><?=ucfirst($instrument_arr[$i])?></h3>
+                    <p><?= $timeslot_arr[$i]; ?></p>
+                    <p>Teacher: Mark</p>
+                  </div>
+                  <img src='img/tab-<?=$instrument_arr[$i]?>.png' alt='<?=$instrument_arr[$i]?>' title='" . <?=ucfirst($instrument_arr[$i])?> . "'/>
+
+                </div>
+
+              <?php }
             ?>
           </div>
           <div class="card zoom">
