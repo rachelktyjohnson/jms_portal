@@ -36,6 +36,11 @@ body {
   font-size: 1.4rem;
   flex-direction: column;
 }
+.loginContainer form span {
+  font-size: 0.9rem;
+  color: red;
+  text-align: center;
+}
 .loginContainer form .form-control {
   display: flex;
   flex-direction: column;
@@ -53,7 +58,7 @@ body {
   border: 1px #aaa solid;
 }
 .loginContainer form input.loginbutton {
-  margin-top: 30px;
+  margin-top: 20px;
   padding: 10px 5px;
   font-size: 1.4rem;
   background: linear-gradient(135deg, #1d3b6d, #018f5f);

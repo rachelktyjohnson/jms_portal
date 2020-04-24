@@ -36,6 +36,11 @@ body{
     display:flex;
     font-size:1.4rem;
     flex-direction: column;
+    span{
+      font-size:0.9rem;
+      color:red;
+      text-align:center;
+    }
     .form-control{
       display:flex;
       flex-direction: column;
@@ -53,7 +58,7 @@ body{
       }
     }
     input.loginbutton{
-      margin-top:30px;
+      margin-top:20px;
       padding:10px 5px;
       font-size:1.4rem;
       background:$color-gradient;

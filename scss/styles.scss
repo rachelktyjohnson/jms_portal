@@ -116,9 +116,17 @@ body{
       flex-grow:1;
       text-align:center;
       &.instruments{
-        img{
-          width:50px;
+        .instruments-list{
+          display:flex;
+          flex-direction: row;
+          align-items: flex-start;
+          justify-content: center;
+          img{
+            width:50px;
+            margin:5px;
+          }
         }
+
       }
       &.zoom{
         .form-control{

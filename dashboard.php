@@ -1,3 +1,31 @@
+
+<?php
+
+// Initialize the session
+session_start();
+
+// if not logged in, send to login page
+if (!isset($_SESSION["loggedin"])){
+header("location: login.php");
+exit;
+}
+
+// Include config file
+require_once "config.php";
+
+//pull user's data from table
+try{
+  $results = $pdo->prepare("SELECT * FROM users WHERE username=?");
+  $results->bindParam(1, $_SESSION["username"], PDO::PARAM_STR);
+  $results->execute();
+  $userData = $results->fetch(PDO::FETCH_ASSOC);
+} catch (Exception $e) {
+  echo "Error: ". $e->getMessage();
+  die();
+}
+
+?>
+
 <!DOCTYPE html>
     <head>
         <meta charset="utf-8">
@@ -17,12 +45,15 @@
 
         <div class="nav-links">
           <a href="dashboard.php">Dashboard</a>
-          <a href="index.php" class="logout">Log Out</a>
+          <a href="logout.php" class="logout">Log Out</a>
         </div>
       </nav>
       <main id="dashboard-container">
         <div class="dashboard-header">
-          <h1>Hi, Amelia!</h1>
+          <?php
+            $userFirstName = explode(" ",$userData['name']);
+          ?>
+          <h1>Hi, <?= $userFirstName[0]; ?>!</h1>
           <h2>Term 2 - Week 1</h2>
         </div>
         <div class="dashboard-announcement">
@@ -36,22 +67,34 @@
         </div>
         <div class="dashboard-content">
           <div class="card instruments">
-            <h2>Your Instrument</h2>
-            <img src="img/tab-guitar.png" title="Guitar" alt="Guitar" />
+            <h2>Your Instruments</h2>
+            <div class="instruments-list">
+              <?php
+                $timeslot_arr = explode(",",$userData['instrument']);
+                foreach ($timeslot_arr as $data){
+                  echo "<img src='img/tab-$data.png' alt='$data' title='" . ucfirst($data) . "'/>";
+                }
+              ?>
+            </div>
           </div>
           <div class="card timeslot">
-            <h2>Your Timeslot</h2>
-            <p>Mondays<br />3:30PM-4:00PM</p>
+            <h2>Your Timeslots</h2>
+            <?php
+              $timeslot_arr = explode(",",$userData['timeslot']);
+              foreach ($timeslot_arr as $data){
+                echo "<p>$data</p>";
+              }
+            ?>
           </div>
           <div class="card zoom">
             <h2>Zoom Lesson Details</h2>
             <div class="form-control">
               <label>Direct Link</label>
-              <input disabled value="zoom.link/123456789" />
+              <input disabled value="<?= $userData['zoom_link']; ?>" />
             </div>
             <div class="form-control">
               <label>Meeting ID</label>
-              <input disabled value="123-456-789" />
+              <input disabled value="<?= $userData['zoom_id']; ?>" />
             </div>
           </div>
         </div>

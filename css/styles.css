@@ -121,8 +121,15 @@ body {
   margin-bottom: 15px;
   font-weight: 500;
 }
-#dashboard-container .dashboard-content .card.instruments img {
+#dashboard-container .dashboard-content .card.instruments .instruments-list {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+}
+#dashboard-container .dashboard-content .card.instruments .instruments-list img {
   width: 50px;
+  margin: 5px;
 }
 #dashboard-container .dashboard-content .card.zoom .form-control {
   margin: 5px 0;
