@@ -11,7 +11,8 @@ exit;
 }
 
 // Include config file
-require_once "config.php";
+include "config.php";
+include "functions.php";
 
 //pull user's data from table
 try{
@@ -54,22 +55,12 @@ try{
             $userFirstName = explode(" ",$userData['name']);
           ?>
           <h1>Hi, <?= $userFirstName[0]; ?>!</h1>
-          <?php
 
-          //work out term
-          $termQuery = $pdo->prepare("SELECT * FROM terms WHERE start < CURDATE() AND end > CURDATE()");
-          $termQuery->execute();
-          $termData = $termQuery->fetch(PDO::FETCH_ASSOC);
-
-          //work out date
-          $termStart = $termData['start'];
-          $startDate = new DateTime($termStart);
-          $todayDate = new DateTime(date('Y-m-d'));
-          $difference = $startDate -> diff($todayDate);
-          $theWeek = floor($difference->format('%R%a')/7) +1;
-          ?>
-          <h2><?=$termData['term']?> - Week <?= $theWeek; ?></h2>
+          <h2><?= getTermWeek($pdo); ?></h2>
         </div>
+
+
+
         <div class="dashboard-announcement">
           <?php
             $announcementsQuery = $pdo->prepare("SELECT * FROM announcements LIMIT 1");
