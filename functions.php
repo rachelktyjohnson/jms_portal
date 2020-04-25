@@ -1,5 +1,7 @@
 <?php
 
+
+//Function to return the current Term and Week
 function getTermWeek($pdo){
 
   //work out term

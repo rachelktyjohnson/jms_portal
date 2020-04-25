@@ -60,21 +60,23 @@ try{
         </div>
 
 
+        <?php
+          $announcementsQuery = $pdo->prepare("SELECT * FROM announcements WHERE feature=1 ORDER BY date DESC");
+          $announcementsQuery->execute();
+          $announcementData = $announcementsQuery->fetchAll(PDO::FETCH_ASSOC);
 
-        <div class="dashboard-announcement">
-          <?php
-            $announcementsQuery = $pdo->prepare("SELECT * FROM announcements LIMIT 1");
-            $announcementsQuery->execute();
-            $announcementData = $announcementsQuery->fetch(PDO::FETCH_ASSOC);
-          ?>
+          foreach ($announcementData as $announcement){
+        ?>
+        <div class="dashboard-announcement <?= $announcement['type']; ?>">
           <div class="announcement-meta">
-            <h2><?= $announcementData['title'];?></h2>
-            <span><?=date_format(new DateTime($announcementData['date']), 'd-m-Y');?></span>
+            <h2><?= $announcement['title'];?></h2>
+            <span><?=date_format(new DateTime($announcement['date']), 'd-m-Y');?></span>
           </div>
           <p>
-            <?= $announcementData['description'];?>
+            <?= $announcement['description'];?>
           </p>
         </div>
+        <?php } ?>
         <div class="dashboard-content">
           <div class="card lessons">
             <?php

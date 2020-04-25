@@ -87,10 +87,13 @@ body {
   align-items: baseline;
 }
 #dashboard-container .dashboard-announcement {
-  padding: 30px;
+  padding: 20px;
   margin: 30px 0;
   border-radius: 5px;
   background: #dfe8f6;
+}
+#dashboard-container .dashboard-announcement.alert {
+  background-color: #ffcccc;
 }
 #dashboard-container .dashboard-announcement .announcement-meta {
   display: flex;
@@ -99,9 +102,12 @@ body {
   align-items: center;
   margin-bottom: 10px;
 }
+#dashboard-container .dashboard-announcement h2 {
+  font-size: 1.2rem;
+}
 #dashboard-container .dashboard-announcement p {
   font-weight: 300;
-  font-size: 1.1rem;
+  font-size: 1rem;
   letter-spacing: 1px;
 }
 #dashboard-container .dashboard-content {
