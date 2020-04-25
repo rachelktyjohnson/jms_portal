@@ -20,6 +20,13 @@ function getTermWeek($pdo){
 
 }
 
+function getWeekDiff($start,$end){
+  $startDate = new DateTime($start);
+  $endDate = new DateTime($end);
+  $difference = $startDate->diff($endDate);
+  return floor($difference->format('%R%a')/7+1);
+}
+
 function getDayOfWeek($num){
   switch($num){
     case 1:
@@ -49,6 +56,12 @@ function getDayOfWeek($num){
 function getCommonTime($time){
   $datetime = new DateTime($time);
   return $datetime->format('g:iA');
+}
+
+function getAUSDateFormat($date){
+  $datetime = new DateTime($date);
+  return $datetime->format('D j M Y');
+  return $date;
 }
 
 function getFirstName($fullname){

@@ -11,8 +11,8 @@ exit;
 }
 
 // Include config file
-include "config.php";
-include "functions.php";
+include "includes/config.php";
+include "includes/functions.php";
 
 //pull user's data from table
 try{
@@ -29,34 +29,14 @@ $userID = $userData['id'];
 
 ?>
 
-<!DOCTYPE html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Dashboard - JMS Portal</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://use.typekit.net/qmr2evg.css">
-        <link rel="stylesheet" href="css/styles.css">
-    </head>
-    <body>
-      <nav id="dashboard-nav">
-        <div class="pre-links">
-          <img src="img/portal-logo.png" />
-          <a href="#" class="trigram">&#9776;</a>
-        </div>
+  <?php include 'includes/header.php' ?>
 
-        <div class="nav-links">
-          <a href="dashboard.php">Dashboard</a>
-          <a href="logout.php" class="logout">Log Out</a>
-        </div>
-      </nav>
       <main id="dashboard-container">
         <div class="dashboard-header">
 
           <h1>Hi, <?= getFirstName($userData['name']); ?>!</h1>
 
-          <h2><?= getTermWeek($pdo); ?></h2>
+          <a href="calendar.php"><h2><?= getTermWeek($pdo); ?></h2></a>
         </div>
 
 
@@ -70,7 +50,7 @@ $userID = $userData['id'];
         <div class="dashboard-announcement <?= $announcement['type']; ?>">
           <div class="announcement-meta">
             <h2><?= $announcement['title'];?></h2>
-            <span><?=date_format(new DateTime($announcement['date']), 'd-m-Y');?></span>
+            <span><?= getAUSDateFormat($announcement['date']);?></span>
           </div>
           <p>
             <?= $announcement['description'];?>
@@ -138,10 +118,4 @@ $userID = $userData['id'];
         </div>
 
       </main>
-      <footer>
-        &copy;  <?= date('Y');?>  Johnson Music School &amp; <a target="_blank" href="http://www.tealjay.com">tealjay</a>
-      </footer>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-      <script src="js/script.js"></script>
-    </body>
-</html>
+<?php include 'includes/footer.php'; ?>

@@ -208,6 +208,11 @@ body {
     margin: 0 10px;
   }
 }
+#dashboard-container .calendar-content th, #dashboard-container .calendar-content td {
+  font-size: 1.4rem;
+  text-align: left;
+  padding: 10px;
+}
 
 footer {
   text-align: center;
