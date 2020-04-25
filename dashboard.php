@@ -25,6 +25,8 @@ try{
   die();
 }
 
+$userID = $userData['id'];
+
 ?>
 
 <!DOCTYPE html>
@@ -51,10 +53,8 @@ try{
       </nav>
       <main id="dashboard-container">
         <div class="dashboard-header">
-          <?php
-            $userFirstName = explode(" ",$userData['name']);
-          ?>
-          <h1>Hi, <?= $userFirstName[0]; ?>!</h1>
+
+          <h1>Hi, <?= getFirstName($userData['name']); ?>!</h1>
 
           <h2><?= getTermWeek($pdo); ?></h2>
         </div>
@@ -79,41 +79,62 @@ try{
         <?php } ?>
         <div class="dashboard-content">
           <div class="card lessons">
+
             <?php
+            //get lessons for this student
+            $querystring = "SELECT day, instruments.name AS instrument, teachers.name AS teacher, start_time, end_time, zoom_link, zoom_id FROM lessons
+                            JOIN instruments ON lessons.instrument=instruments.id
+                            JOIN teachers ON lessons.teacher=teachers.id
+                            WHERE student=?";
+            $lessonsQuery = $pdo->prepare($querystring);
+            $lessonsQuery->bindParam(1, $userID, PDO::PARAM_INT);
+            $lessonsQuery->execute();
+            $lessonsData = $lessonsQuery->fetchAll(PDO::FETCH_ASSOC);
             $plural="";
-            $instrument_arr = explode(",",$userData['instrument']);
-            $timeslot_arr = explode(",",$userData['timeslot']);
-            if (count($instrument_arr)>1){
-              $plural="s";
-            }
+            if (count($lessonsData)>1){$plural="s";}
             ?>
-            <h2>Your Lesson<?= $plural; ?></h2>
-            <?php
-              for ($i=0; $i<count($instrument_arr); $i++){?>
-                <div class="lesson_tab">
-                  <div class="lesson_data">
-                    <h3><?=ucfirst($instrument_arr[$i])?></h3>
-                    <p><?= $timeslot_arr[$i]; ?></p>
-                    <p>Teacher: Mark</p>
+            <h2>Your Lesson<?=$plural?></h2>
+            <?php foreach ($lessonsData as $lesson){
+            ?>
+
+            <div class="lesson_details">
+
+              <?php
+              $instrument = explode(" ",$lesson['instrument']);
+              $instrument = strtolower(end($instrument));
+              ?>
+
+              <div class="lesson_header">
+                <img src='img/tab-<?=$instrument?>.png' alt='<?=$instrument?>' title='<?=$instrument?>'/>
+                <h3><?= ucfirst($instrument)?></h3>
+              </div>
+
+
+              <div class="lesson_data">
+                <p><?= getDayOfWeek($lesson['day']) ?></p>
+                <p><?= getCommonTime($lesson['start_time']) ?>-<?= getCommonTime($lesson['end_time']) ?></p>
+                <p>Teacher: <?= getFirstName($lesson['teacher']) ?></p>
+              </div>
+
+                  <div class="zoom_tab">
+                    <h4>Zoom Details</h4>
+                    <?php if ($lesson['zoom_link']!=null && $lesson['zoom_link']!=null){?>
+                      <p><a target="_blank" href="<?= $lesson['zoom_link'] ?>">Zoom Link</a></p>
+                      <p>ID: <?= $lesson['zoom_id']?></p>
+                    <?php } else { ?>
+                      <p>
+                        N/A
+                      </p>
+                    <?php }?>
                   </div>
-                  <img src='img/tab-<?=$instrument_arr[$i]?>.png' alt='<?=$instrument_arr[$i]?>' title='" . <?=ucfirst($instrument_arr[$i])?> . "'/>
 
-                </div>
 
-              <?php }
-            ?>
-          </div>
-          <div class="card zoom">
-            <h2>Zoom Lesson Details</h2>
-            <div class="form-control">
-              <label>Direct Link</label>
-              <input disabled value="<?= $userData['zoom_link']; ?>" />
             </div>
-            <div class="form-control">
-              <label>Meeting ID</label>
-              <input disabled value="<?= $userData['zoom_id']; ?>" />
-            </div>
+
+            <?php }?>
+
           </div>
+
         </div>
 
       </main>

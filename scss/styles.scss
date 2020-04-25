@@ -1,162 +1,223 @@
 @import 'mixins';
 
-*{
-  padding:0;
-  margin:0;
+* {
+  padding: 0;
+  margin: 0;
   font-family: paralucent-condensed, sans-serif;
   box-sizing: border-box;
 }
 
-
-a{
+a {
   text-decoration: none;
-  color:$color-green;
+  color: $color-green;
 }
 
-body{
-  background-image: url('../img/background.jpg');
+body {
+  background-image: url("../img/background.jpg");
   height: 100%;
   background-size: cover;
   background-attachment: fixed;
   background-position: right;
-  max-width:1000px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
-#dashboard-nav{
-  width:100%;
-  background:#f5f5f5;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  @include tablet{
-    flex-direction:row;
+#dashboard-nav {
+  width: 100%;
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @include tablet {
+    flex-direction: row;
   }
-  .pre-links{
-    width:100%;
-    padding:10px 15px;
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    justify-content: space-between;
-    .trigram{
-      @include tablet{
-        display:none;
-      }
-      font-size:2rem;
-    }
-  }
-  img{
-    max-height:35px;
-  }
-  .nav-links{
-    display:flex;
-    flex-direction:column;
-    width:100%;
+
+  .pre-links {
+    width: 100%;
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: row;
     align-items: center;
-    font-size:1.6rem;
-    padding:20px;
-    a{
-      padding:20px 0;
+    justify-content: space-between;
+
+    .trigram {
+      @include tablet {
+        display: none;
+      }
+      font-size: 2rem;
     }
-    .logout{
-      color:#aaa;
+  }
+
+  img {
+    max-height: 35px;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    font-size: 1.6rem;
+    padding: 20px;
+
+    a {
+      padding: 20px 0;
     }
-    @include tablet{
-      flex-direction:row;
+
+    .logout {
+      color: #aaa;
+    }
+    @include tablet {
+      flex-direction: row;
       justify-content: flex-end;
-      padding:0 20px;
-      font-size:1.2rem;
-      a{
-        padding:0 10px;
+      padding: 0 20px;
+      font-size: 1.2rem;
+
+      a {
+        padding: 0 10px;
       }
     }
   }
 }
 
-#dashboard-container{
-  background:white;
-  padding:50px;
-  .dashboard-header{
-    display:flex;
-    justify-content: space-between;
-    align-items: baseline;
-  }
-  .dashboard-announcement{
-    &.alert{
-      background-color:lighten(red,40%);
-    }
-    .announcement-meta{
-      display:flex;
+#dashboard-container {
+  background: white;
+  padding: 50px;
+
+  .dashboard-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @include tablet {
       flex-direction: row;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom:10px;
+      align-items: baseline;
     }
-    padding:20px;
+  }
+
+  .dashboard-announcement {
+    &.alert {
+      background-color: lighten(red,40%);
+    }
+
+    .announcement-meta {
+      display: flex;
+      flex-direction: column;
+      @include tablet {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+    }
+    padding: 20px;
     margin: 30px 0;
-    border-radius:5px;
-    background:lighten($color-blue,65%);
-    h2{
-      font-size:1.2rem;
+    border-radius: 5px;
+    background: lighten($color-blue,65%);
+
+    h2 {
+      font-size: 1.2rem;
     }
-    p{
-      font-weight:300;
-      font-size:1rem;
+
+    p {
+      font-weight: 300;
+      font-size: 1rem;
       letter-spacing: 1px;
     }
   }
-  .dashboard-content{
-    display:flex;
+
+  .dashboard-content {
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    .card{
-      border:2px solid lighten($color-blue,50%);
-      border-radius:$border-radius;
-      margin:10px;
-      padding:15px;
+
+    .card {
+      border: 2px solid lighten($color-blue,50%);
+      border-radius: $border-radius;
+      flex-grow: 1;
+      margin: 10px;
+      padding: 10px;
+      display:flex;
+      flex-direction: column;
+      align-items: center;
       h2{
-        margin-bottom:15px;
-        font-weight:500;
+        margin-bottom:20px;
+        font-size:2rem;
       }
-      flex-grow:1;
-      text-align:center;
-      &.lessons .lesson_tab{
+      h3{
+        font-size:1.6rem;
+      }
+      p{
+        font-size:1.3rem;
+      }
+
+      .lesson_details{
+        & + .lesson_details{
+          margin-top:40px;
+          @include tablet{
+            margin-top:20px;
+          }
+        }
         display:flex;
-        flex-direction: row;
+        flex-direction:column;
         align-items: center;
         justify-content: center;
-        margin-bottom:20px;
-        img{
-          height:60px;
+        padding:10px 15px;
+        @include tablet{
+          flex-direction:row;
+          align-items: center;
+        }
+        .lesson_header{
+          display:flex;
+          flex-direction:column;
+          align-items: center;
+          @include tablet{
+            margin:0 10px;
+          }
+          img{
+            height:50px;
+            margin-bottom:5px;
+          }
         }
         .lesson_data{
-          text-align:left;
-          margin-right:10px;
+          display:flex;
+          flex-direction: column;
+          justify-content: center;
+          text-align:center;
+          @include tablet{
+            margin:0 10px;
+          }
         }
-      }
-      &.zoom{
-        .form-control{
-          margin:5px 0;
-          input{
-            padding:3px 6px;
-            border:0;
-            border-radius:5px;
+        .zoom_tab{
+          display:flex;
+          flex-direction: column;
+          justify-content: center;
+          text-align:center;
+          margin-top:10px;
+          padding:5px 10px;
+          border-radius:5px;
+          background:#ccc;
+          @include tablet{
+            margin:0 10px;
           }
         }
       }
+
+
+
     }
   }
 }
 
-footer{
-  text-align:center;
-  color:white;
-  font-weight:200;
+footer {
+  text-align: center;
+  color: white;
+  font-weight: 200;
   letter-spacing: 1px;
-  font-size:0.8rem;
-  margin-top:5px;
-  a{
-    color:white;
+  font-size: 0.8rem;
+  margin: 5px;
+
+  a {
+    color: white;
   }
 }

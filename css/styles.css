@@ -83,8 +83,15 @@ body {
 }
 #dashboard-container .dashboard-header {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+  flex-direction: column;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  #dashboard-container .dashboard-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+  }
 }
 #dashboard-container .dashboard-announcement {
   padding: 20px;
@@ -97,10 +104,15 @@ body {
 }
 #dashboard-container .dashboard-announcement .announcement-meta {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+  flex-direction: column;
+}
+@media (min-width: 768px) {
+  #dashboard-container .dashboard-announcement .announcement-meta {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
 }
 #dashboard-container .dashboard-announcement h2 {
   font-size: 1.2rem;
@@ -118,36 +130,83 @@ body {
 #dashboard-container .dashboard-content .card {
   border: 2px solid #a3bce6;
   border-radius: 10px;
-  margin: 10px;
-  padding: 15px;
   flex-grow: 1;
-  text-align: center;
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 #dashboard-container .dashboard-content .card h2 {
-  margin-bottom: 15px;
-  font-weight: 500;
+  margin-bottom: 20px;
+  font-size: 2rem;
 }
-#dashboard-container .dashboard-content .card.lessons .lesson_tab {
+#dashboard-container .dashboard-content .card h3 {
+  font-size: 1.6rem;
+}
+#dashboard-container .dashboard-content .card p {
+  font-size: 1.3rem;
+}
+#dashboard-container .dashboard-content .card .lesson_details {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+  padding: 10px 15px;
 }
-#dashboard-container .dashboard-content .card.lessons .lesson_tab img {
-  height: 60px;
+#dashboard-container .dashboard-content .card .lesson_details + .lesson_details {
+  margin-top: 40px;
 }
-#dashboard-container .dashboard-content .card.lessons .lesson_tab .lesson_data {
-  text-align: left;
-  margin-right: 10px;
+@media (min-width: 768px) {
+  #dashboard-container .dashboard-content .card .lesson_details + .lesson_details {
+    margin-top: 20px;
+  }
 }
-#dashboard-container .dashboard-content .card.zoom .form-control {
-  margin: 5px 0;
+@media (min-width: 768px) {
+  #dashboard-container .dashboard-content .card .lesson_details {
+    flex-direction: row;
+    align-items: center;
+  }
 }
-#dashboard-container .dashboard-content .card.zoom .form-control input {
-  padding: 3px 6px;
-  border: 0;
+#dashboard-container .dashboard-content .card .lesson_details .lesson_header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  #dashboard-container .dashboard-content .card .lesson_details .lesson_header {
+    margin: 0 10px;
+  }
+}
+#dashboard-container .dashboard-content .card .lesson_details .lesson_header img {
+  height: 50px;
+  margin-bottom: 5px;
+}
+#dashboard-container .dashboard-content .card .lesson_details .lesson_data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  #dashboard-container .dashboard-content .card .lesson_details .lesson_data {
+    margin: 0 10px;
+  }
+}
+#dashboard-container .dashboard-content .card .lesson_details .zoom_tab {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-top: 10px;
+  padding: 5px 10px;
   border-radius: 5px;
+  background: #ccc;
+}
+@media (min-width: 768px) {
+  #dashboard-container .dashboard-content .card .lesson_details .zoom_tab {
+    margin: 0 10px;
+  }
 }
 
 footer {
@@ -156,7 +215,7 @@ footer {
   font-weight: 200;
   letter-spacing: 1px;
   font-size: 0.8rem;
-  margin-top: 5px;
+  margin: 5px;
 }
 footer a {
   color: white;
