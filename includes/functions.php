@@ -5,7 +5,7 @@
 function getTermWeek($pdo){
 
   //work out term
-  $termQuery = $pdo->prepare("SELECT * FROM terms WHERE start < CURDATE() AND end > CURDATE()");
+  $termQuery = $pdo->prepare("SELECT * FROM terms WHERE start <= CURDATE() AND end >= CURDATE()");
   $termQuery->execute();
   $termData = $termQuery->fetch(PDO::FETCH_ASSOC);
 

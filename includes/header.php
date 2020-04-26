@@ -12,7 +12,7 @@
     <body>
       <nav id="dashboard-nav">
         <div class="pre-links">
-          <img src="img/portal-logo.png" />
+          <a href="index.php"><img src="img/portal-logo.png" /></a>
           <a href="#" class="trigram">&#9776;</a>
         </div>
 

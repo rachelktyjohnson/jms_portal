@@ -53,7 +53,7 @@ $userID = $userData['id'];
             $calendarData = $calendarQuery->fetchAll(PDO::FETCH_ASSOC);
             foreach ($calendarData as $term){
               $currentTerm = "";
-              if ($term['start']<date('Y-m-d') && $term['end']>date('Y-m-d')){
+              if ($term['start']<=date('Y-m-d') && $term['end']>=date('Y-m-d')){
                 $currentTerm = "style='color:#018f5f !important;'";
               }
             ?>
