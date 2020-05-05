@@ -19,6 +19,7 @@
         <div class="nav-links">
           <a href="dashboard.php">Dashboard</a>
           <a href="calendar.php">Calendar</a>
+          <a href="settings.php">Settings</a>
           <a href="logout.php" class="logout">Log Out</a>
         </div>
       </nav>

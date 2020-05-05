@@ -80,9 +80,12 @@ body {
   }
 }
 
-#dashboard-container {
+main{
   background: white;
   padding: 50px;
+}
+
+#dashboard-container {
 
   .dashboard-header {
     display: flex;
@@ -218,7 +221,28 @@ body {
   }
 }
 
-
+#settings-container {
+  .settings-header{
+    margin-bottom:30px;
+  }
+  .settings-content{
+    display:flex;
+    flex-direction:column;
+    .settingscard{
+      margin:20px 0;
+    }
+    input{
+      border-radius:5px;
+      border:1px solid #aaa;
+      padding:10px;
+      margin:5px 0;
+      font-size:1rem;
+      width:100%;
+    }
+    input[type="submit"]{
+    }
+  }
+}
 
 footer {
   text-align: center;
