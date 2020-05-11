@@ -62,7 +62,7 @@ $userID = $userData['id'];
 
             <?php
             //get lessons for this student
-            $querystring = "SELECT day, instruments.name AS instrument, teachers.name AS teacher, start_time, end_time, zoom_link, zoom_id FROM lessons
+            $querystring = "SELECT day, instruments.name AS instrument, teachers.name AS teacher, start_time, end_time, zoom_link, zoom_id, zoom_password FROM lessons
                             JOIN instruments ON lessons.instrument=instruments.id
                             JOIN teachers ON lessons.teacher=teachers.id
                             WHERE student=?";
@@ -101,6 +101,7 @@ $userID = $userData['id'];
                     <?php if ($lesson['zoom_link']!=null && $lesson['zoom_link']!=null){?>
                       <p><a target="_blank" href="<?= $lesson['zoom_link'] ?>">Zoom Link</a></p>
                       <p>ID: <?= $lesson['zoom_id']?></p>
+                      <p>Password: <?= $lesson['zoom_password']?></p>
                     <?php } else { ?>
                       <p>
                         N/A
